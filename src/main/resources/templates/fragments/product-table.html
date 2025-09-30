@@ -1,0 +1,43 @@
+<div id="product-table" th:fragment="table">
+  <wa-card>
+    <wa-card-header>
+      <wa-card-title>Product List</wa-card-title>
+    </wa-card-header>
+
+    <wa-card-content>
+      <table class="wa-table wa-table--hover wa-table--striped wa-table--bordered full-grid">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Vendor</th>
+          <th>Type</th>
+          <th>Variants</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${products}">
+          <td th:text="${p.id}"></td>
+          <td th:text="${p.title}"></td>
+          <td th:text="${p.vendor}"></td>
+          <td th:text="${p.productType}"></td>
+          <td>
+            <ul class="variants">
+              <li th:each="v : ${p.variants}">
+                <span>
+                  <span th:text="${v.title}"></span> –
+                  <strong class="price-black" th:text="${v.price}"></strong>
+                </span>
+                <wa-badge pill size="sm"
+                          th:text="${v.available ? 'Available' : 'Out'}"
+                          th:classappend="${v.available} ? ' badge-available' : ' badge-out'">
+                </wa-badge>
+              </li>
+            </ul>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </wa-card-content>
+  </wa-card>
+</div>
